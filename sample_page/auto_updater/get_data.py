@@ -1,11 +1,11 @@
 from requests_html import HTMLSession
-from bitcoin.serializers import InfoSerializer
+from bitcoin.serializers import InfoSerializer, InfoNopkSerializer
+from bitcoin.models import Info
 
 
 def get_price():
     session = HTMLSession()
     url = "https://www.coindesk.com/price/bitcoin"
-    print("hello")
 
     request = session.get(url)
 
@@ -16,10 +16,11 @@ def get_price():
         "price": price,
         "marketCap": marketCap
     }
-
-    serializer = InfoSerializer(data=result)
-    if serializer.is_valid():
-        print("hello")
-        serializer.save()
-    else:
-        pass
+    lastest_price = Info.objects.last()
+    lastestdata = InfoNopkSerializer(lastest_price).data
+    if (lastestdata != result):
+        serializer = InfoSerializer(data=result)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            pass
