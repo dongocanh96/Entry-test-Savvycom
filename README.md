@@ -3,7 +3,7 @@
 ##**How to run project**:<br>
 1. CLone to your pc (requires a machine with git, python and pipenv installed) <br>
 2. Open terminal and switch to the project file <br>
-3.`pipenv shell` <br>
+3. `pipenv shell` <br>
 4. `pipenv install` <br>
 5. `cd sample_page` <br>
 6. `python manage.py makemigrations` <br>
